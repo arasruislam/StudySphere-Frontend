@@ -52,7 +52,7 @@ const Header = () => {
                <div className="navbar p-0">
                   {/* navbar logo */}
                   <div className="navbar-start">
-                     <div className="flex items-center gap-2 font-extrabold text-3xl ">
+                     <Link to="/" className="flex items-center gap-2 font-extrabold text-3xl ">
                         <img
                            style={{ width: 60, height: 60 }}
                            src={logo}
@@ -62,7 +62,7 @@ const Header = () => {
                            <span className="text-[#3890d8]">Study</span>
                            <span className="text-[#FFC338]">Sphere</span>
                         </p>
-                     </div>
+                     </Link>
                   </div>
 
                   {/* nav items */}
@@ -138,7 +138,7 @@ const Header = () => {
                               <a>Log in</a>
                            </li>
                            <li>
-                              <a>Sing Up</a>
+                              <a>Sign Up</a>
                            </li>
                         </ul>
                      </div>
