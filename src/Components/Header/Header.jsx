@@ -52,7 +52,10 @@ const Header = () => {
                <div className="navbar p-0">
                   {/* navbar logo */}
                   <div className="navbar-start">
-                     <Link to="/" className="flex items-center gap-2 font-extrabold text-3xl ">
+                     <Link
+                        to="/"
+                        className="flex items-center gap-2 font-extrabold text-3xl "
+                     >
                         <img
                            style={{ width: 60, height: 60 }}
                            src={logo}
