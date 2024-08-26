@@ -8,7 +8,7 @@ const Primary = () => {
     <>
       <Header />
       <Container>
-        <div className="min-h-[calc(100vh-220px)] pt-20 mb-8">
+        <div className="min-h-[calc(100vh-124px)] pt-20 mb-8">
           <Outlet />
         </div>
       </Container>
