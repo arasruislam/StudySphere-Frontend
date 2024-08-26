@@ -47,7 +47,7 @@ const Header = () => {
 
    return (
       <>
-         <div className="shadow-lg fixed top-0 right-0 left-0 py-1 z-10">
+         <div className="shadow-md bg-white fixed top-0 right-0 left-0 py-1 z-50">
             <Container>
                <div className="navbar p-0">
                   {/* navbar logo */}

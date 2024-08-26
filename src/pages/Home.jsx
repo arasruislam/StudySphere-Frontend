@@ -1,11 +1,12 @@
+import Hero from "../Components/Sections/Hero";
+
 const Home = () => {
-  return (
-    <>
-      <div>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      </div>
-    </>
-  );
+   return (
+      <>
+         {/* Hero section */}
+         <Hero />
+      </>
+   );
 };
 
 export default Home;
