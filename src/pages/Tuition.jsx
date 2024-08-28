@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import TuitionCard from "../Components/Sections/TuitionCard";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import EmptyState from "../Components/Sections/EmptyState";
 
 const Tuition = () => {
    const [tuitions, setTuitions] = useState([]);
@@ -110,8 +111,6 @@ const Tuition = () => {
       }
    };
 
-   // error state
-   
 
    if (tuitions < 1) return <Loader />;
    return (
@@ -121,7 +120,7 @@ const Tuition = () => {
                <div
                   tabIndex={0}
                   role="button"
-                  className="btn m-1 bg-[#FFC338] border-none hover:bg-[#e6b032]"
+                  className="btn m-1 text-white font-bold bg-[#3890d8] border-none hover:bg-[#3890d8]"
                >
                   Filter by level
                </div>
@@ -151,15 +150,26 @@ const Tuition = () => {
             </div>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredData.map((tuition) => (
-               <TuitionCard key={tuition.id} tuition={tuition} />
-            ))}
-         </div>
+         {/* all tuitions data */}
+         {filteredData.length < 1 ? (
+            <EmptyState
+               message="No tuitions Found"
+               address="/tuitions"
+               label="Browse tuitions"
+            />
+         ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {filteredData.map((tuition) => (
+                  <TuitionCard key={tuition.id} tuition={tuition} />
+               ))}
+            </div>
+         )}
 
-         <div className="grid place-items-center mt-8">
-            <div className="join">{renderPagination()}</div>
-         </div>
+         {filteredData.length > 0 && (
+            <div className="grid place-items-center mt-8">
+               <div className="join">{renderPagination()}</div>
+            </div>
+         )}
       </>
    );
 };
