@@ -1,96 +1,122 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
    return (
-      <section className="p-6 dark:bg-gray-100 dark:text-gray-900">
-         <form
-            noValidate=""
-            action=""
-            className="container flex flex-col mx-auto space-y-12"
-         >
-            <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
-               <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                  <div className="col-span-full sm:col-span-3">
-                     <label htmlFor="firstname" className="text-sm">
-                        First name
+      <div className="flex flex-col max-w-3xl mx-auto shadow-md p-6 rounded-md sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
+         <div className="mb-8 text-center">
+            <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
+            <p className="text-sm text-gray-400 dark:text-gray-600">
+               Sign up to create your account
+            </p>
+         </div>
+         <form noValidate="" action="" className="space-y-12">
+            <div className="space-y-4">
+               {/* first & last name */}
+               <div className="flex flex-col md:flex-row gap-4 items-center">
+                  <div className="flex-1">
+                     <label htmlFor="first_name" className="text-sm">
+                        First Name
                      </label>
                      <input
-                        id="firstname"
                         type="text"
-                        placeholder="First name"
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
+                        name="first_name"
+                        id="first_name"
+                        placeholder="enter first name"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                      />
                   </div>
-                  <div className="col-span-full sm:col-span-3">
-                     <label htmlFor="lastname" className="text-sm">
-                        Last name
+                  <div className="flex-1">
+                     <label htmlFor="last_name" className="text-sm">
+                        Last Name
                      </label>
                      <input
-                        id="lastname"
                         type="text"
-                        placeholder="Last name"
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                     />
-                  </div>
-                  <div className="col-span-full sm:col-span-3">
-                     <label htmlFor="email" className="text-sm">
-                        Email
-                     </label>
-                     <input
-                        id="email"
-                        type="email"
-                        placeholder="Email"
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                     />
-                  </div>
-                  <div className="col-span-full">
-                     <label htmlFor="address" className="text-sm">
-                        Address
-                     </label>
-                     <input
-                        id="address"
-                        type="text"
-                        placeholder=""
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                     />
-                  </div>
-                  <div className="col-span-full sm:col-span-2">
-                     <label htmlFor="city" className="text-sm">
-                        City
-                     </label>
-                     <input
-                        id="city"
-                        type="text"
-                        placeholder=""
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                     />
-                  </div>
-                  <div className="col-span-full sm:col-span-2">
-                     <label htmlFor="state" className="text-sm">
-                        State / Province
-                     </label>
-                     <input
-                        id="state"
-                        type="text"
-                        placeholder=""
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
-                     />
-                  </div>
-                  <div className="col-span-full sm:col-span-2">
-                     <label htmlFor="zip" className="text-sm">
-                        ZIP / Postal
-                     </label>
-                     <input
-                        id="zip"
-                        type="text"
-                        placeholder=""
-                        className="w-full rounded-md focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
+                        name="last_name"
+                        id="last_name"
+                        placeholder="enter last name"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                      />
                   </div>
                </div>
-            </fieldset>
+
+               {/* email & username */}
+               <div className="flex flex-col md:flex-row gap-4 items-center">
+                  <div className="flex-1">
+                     <label htmlFor="username" className="text-sm">
+                        Username
+                     </label>
+                     <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        placeholder="username"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                     />
+                  </div>
+                  <div className="flex-1">
+                     <label htmlFor="email" className="text-sm">
+                        Password
+                     </label>
+                     <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="example@gmail.com"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                     />
+                  </div>
+               </div>
+
+               {/* password & confirm password */}
+               <div className="flex flex-col md:flex-row gap-4 items-center">
+                  <div className="flex-1">
+                     <label htmlFor="password" className="text-sm">
+                        Password
+                     </label>
+                     <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="****"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                     />
+                  </div>
+                  <div className="flex-1">
+                     <label htmlFor="confirm_password" className="text-sm">
+                        Confirm Password
+                     </label>
+                     <input
+                        type="password"
+                        name="confirm_password"
+                        id="confirm_password"
+                        placeholder="***"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                     />
+                  </div>
+               </div>
+            </div>
+            <div className="space-y-2">
+               <div>
+                  <button
+                     type="button"
+                     className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50"
+                  >
+                     Sign Up
+                  </button>
+               </div>
+               <p className="px-6 text-sm text-center text-gray-400 dark:text-gray-600">
+                  Already have an account?{" "}
+                  <Link
+                     to="/login"
+                     className="hover:underline text-[#FFC338] dark:text-[#FFC338]"
+                  >
+                     login
+                  </Link>
+               </p>
+            </div>
          </form>
-      </section>
+      </div>
    );
 };
 
