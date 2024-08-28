@@ -3,6 +3,7 @@ import Primary from "../Layouts/Primary";
 import Error from "../pages/Error";
 import Home from "../pages/Home";
 import Tuition from "../pages/Tuition";
+import TuitionDetails from "../Components/Sections/TuitionDetails";
 
 const router = createBrowserRouter([
    {
@@ -19,8 +20,9 @@ const router = createBrowserRouter([
             element: <Tuition />,
          },
          {
-            path: "/tuitions/:page",
-            element: <Tuition />,
+            path: "/tuitions/:id",
+            element: <TuitionDetails />,
+            loader: ()=> fetch(``)
          },
       ],
    },

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import TuitionCard from "../Components/Sections/TuitionCard";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const Tuition = () => {
    const [tuitions, setTuitions] = useState([]);
@@ -95,6 +96,7 @@ const Tuition = () => {
       return paginationItems;
    };
 
+   if (tuitions < 1) return <Loader />;
    return (
       <>
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
