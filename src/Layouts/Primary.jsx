@@ -5,15 +5,15 @@ import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import Loader from "../pages/Loader";
 
 const Primary = () => {
-   // const navigation = useNavigation();
+   const navigation = useNavigation();
 
    return (
       <>
          <Header />
          <Container>
             <div className="min-h-[calc(100vh-124px)] pt-24 mb-8">
-               {/* {navigation.state === "loading" ? <Loader /> : <Outlet />} */}
-               <Outlet />
+               {navigation.state === "loading" ? <Loader /> : <Outlet />}
+               {/* <Outlet /> */}
             </div>
          </Container>
          <Footer />
