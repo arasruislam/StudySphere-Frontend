@@ -6,6 +6,7 @@ import Tuition from "../pages/Tuition";
 import TuitionDetails from "../Components/Sections/TuitionDetails";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
    {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
                   `https://studysphere-dnn6.onrender.com/tuitions/list/?id=${params.id}`
                ),
          },
-         // login & signup
+         // login & sign up
          {
             path: "/login",
             element: <Login />,
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
          {
             path: "/signUp",
             element: <SignUp />,
+         },
+         {
+            path: "/profile",
+            element: <Profile />,
          },
       ],
    },

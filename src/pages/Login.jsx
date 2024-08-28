@@ -2,6 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+   // handle form submit
+   const handleLogin = (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      console.log({email, password});
+   };
+
    return (
       <div className="flex flex-col max-w-md mx-auto shadow-md p-6 rounded-md sm:p-8 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
          <div className="mb-8 text-center">
@@ -10,7 +19,7 @@ const Login = () => {
                Sign in to access your account
             </p>
          </div>
-         <form noValidate="" action="" className="space-y-12">
+         <form onSubmit={handleLogin} className="space-y-12">
             <div className="space-y-4">
                <div>
                   <label htmlFor="email" className="block mb-2 text-sm">
@@ -49,8 +58,8 @@ const Login = () => {
             <div className="space-y-2">
                <div>
                   <button
-                     type="button"
-                     className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50"
+                     type="submit"
+                     className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50 hover:scale-95 transition-all duration-300"
                   >
                      Sign in
                   </button>

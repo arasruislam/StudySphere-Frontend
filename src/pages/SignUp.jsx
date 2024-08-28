@@ -2,6 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+   const handleSignUpUser = (e) => {
+      e.preventDefault();
+
+      // form data
+      const first_name = e.target.first_name.value;
+      const last_name = e.target.last_name.value;
+      const username = e.target.username.value;
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      const confirm_password = e.target.confirm_password.value;
+
+      console.log({
+         first_name,
+         last_name,
+         username,
+         email,
+         password,
+         confirm_password,
+      });
+   };
    return (
       <div className="flex flex-col max-w-3xl mx-auto shadow-md p-6 rounded-md sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
          <div className="mb-8 text-center">
@@ -10,7 +30,7 @@ const SignUp = () => {
                Sign up to create your account
             </p>
          </div>
-         <form noValidate="" action="" className="space-y-12">
+         <form onSubmit={handleSignUpUser} className="space-y-12">
             <div className="space-y-4">
                {/* first & last name */}
                <div className="flex flex-col md:flex-row gap-4 items-center">
@@ -99,7 +119,7 @@ const SignUp = () => {
             <div className="space-y-2">
                <div>
                   <button
-                     type="button"
+                     type="submit"
                      className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50"
                   >
                      Sign Up
