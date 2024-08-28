@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
    return (
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
+      <div className="flex flex-col max-w-md mx-auto shadow-md p-6 rounded-md sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
          <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold">Sign in</h1>
             <p className="text-sm text-gray-400 dark:text-gray-600">
@@ -49,21 +50,19 @@ const Login = () => {
                <div>
                   <button
                      type="button"
-                     className="w-full px-8 py-3 font-semibold rounded-md bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50"
+                     className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50"
                   >
                      Sign in
                   </button>
                </div>
                <p className="px-6 text-sm text-center text-gray-400 dark:text-gray-600">
-                  Don't have an account yet?
-                  <a
-                     rel="noopener noreferrer"
-                     href="#"
-                     className="hover:underline text-violet-400 dark:text-violet-600"
+                  Don't have an account yet?{" "}
+                  <Link
+                     to="/signUp"
+                     className="hover:underline text-[#FFC338] dark:text-[#FFC338]"
                   >
-                     Sign up
-                  </a>
-                  .
+                     SignUp
+                  </Link>
                </p>
             </div>
          </form>
