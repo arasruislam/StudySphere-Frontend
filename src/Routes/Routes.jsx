@@ -22,7 +22,10 @@ const router = createBrowserRouter([
          {
             path: "/tuitions/:id",
             element: <TuitionDetails />,
-            loader: ()=> fetch(``)
+            loader: ({ params }) =>
+               fetch(
+                  `https://studysphere-dnn6.onrender.com/tuitions/list/?id=${params.id}`
+               ),
          },
       ],
    },
