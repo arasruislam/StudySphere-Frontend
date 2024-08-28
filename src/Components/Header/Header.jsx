@@ -135,13 +135,13 @@ const Header = () => {
                               {navItems}
                            </span>
                            <li>
-                              <a className="justify-between">Profile</a>
+                              <Link className="justify-between">Profile</Link>
                            </li>
                            <li>
-                              <a>Log in</a>
+                              <Link to="/login">Log in</Link>
                            </li>
                            <li>
-                              <a>Sign Up</a>
+                              <Link to="/signUp">Sign Up</Link>
                            </li>
                         </ul>
                      </div>
