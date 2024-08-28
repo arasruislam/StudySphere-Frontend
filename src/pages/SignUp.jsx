@@ -1,8 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const SignUp = () => {
-   const handleSignUpUser = (e) => {
+   const navigate = useNavigate();
+   const [loading, setLoading] = useState(false);
+
+   const handleSignUpUser = async (e) => {
       e.preventDefault();
 
       // form data
@@ -13,15 +19,70 @@ const SignUp = () => {
       const password = e.target.password.value;
       const confirm_password = e.target.confirm_password.value;
 
-      console.log({
+      const newUser = {
+         username,
          first_name,
          last_name,
-         username,
          email,
          password,
          confirm_password,
-      });
+      };
+
+      // password validation
+      if (password !== confirm_password) {
+         toast.error("confirm password not match");
+         return;
+      }
+      if (password.length < 8) {
+         toast.error("8 character password needed");
+         return;
+      }
+      if (!/(?=.*[A-Z])/.test(password)) {
+         toast.error("at least one upper case");
+         return;
+      }
+      if (!/(?=.*[@$!%*?&])/.test(password)) {
+         toast.error("at least one special character");
+         return;
+      }
+
+      try {
+         setLoading(true);
+         const response = await axios.post(
+            "https://studysphere-dnn6.onrender.com/accounts/new_user/register/",
+            newUser
+         );
+
+         if (response.status === 200) {
+            toast.success(
+               "Registration successful! Please check your email to confirm your account."
+            );
+            navigate("/profile");
+         } else {
+            toast.error("Something went wrong. Please try again.");
+         }
+      } catch (error) {
+         console.log(error);
+         toast.error("An error occurred. Please try again.");
+      } finally {
+         setLoading(false);
+      }
+
+      // fetch(
+      //    "https://studysphere-dnn6.onrender.com/accounts/new_user/register/",
+      //    {
+      //       method: "POST",
+      //       headers: { "content-type": "application/json" },
+      //       body: JSON.stringify(newUser),
+      //    }
+      // )
+      //    .then((rest) => rest.json())
+      //    .then((data) => console.log(data));
+
    };
+
+   if (loading === true) return <Loader />;
+
    return (
       <div className="flex flex-col max-w-3xl mx-auto shadow-md p-6 rounded-md sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
          <div className="mb-8 text-center">
@@ -44,6 +105,7 @@ const SignUp = () => {
                         id="first_name"
                         placeholder="enter first name"
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
                      />
                   </div>
                   <div className="flex-1">
@@ -56,6 +118,7 @@ const SignUp = () => {
                         id="last_name"
                         placeholder="enter last name"
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
                      />
                   </div>
                </div>
@@ -72,11 +135,12 @@ const SignUp = () => {
                         id="username"
                         placeholder="username"
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
                      />
                   </div>
                   <div className="flex-1">
                      <label htmlFor="email" className="text-sm">
-                        Password
+                        Email
                      </label>
                      <input
                         type="email"
@@ -84,6 +148,7 @@ const SignUp = () => {
                         id="email"
                         placeholder="example@gmail.com"
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
                      />
                   </div>
                </div>
@@ -100,6 +165,7 @@ const SignUp = () => {
                         id="password"
                         placeholder="****"
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
                      />
                   </div>
                   <div className="flex-1">
@@ -112,6 +178,7 @@ const SignUp = () => {
                         id="confirm_password"
                         placeholder="***"
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
                      />
                   </div>
                </div>
@@ -120,7 +187,7 @@ const SignUp = () => {
                <div>
                   <button
                      type="submit"
-                     className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50"
+                     className="w-full px-8 py-3 font-semibold rounded-md bg-[#3890d8] dark:bg-[#3890d8] text-gray-900 dark:text-gray-50 hover:scale-95 transition-all duration-300"
                   >
                      Sign Up
                   </button>

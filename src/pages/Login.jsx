@@ -1,15 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "./Loader";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
+   const [loading, setLoading] = useState(false);
+   const navigate = useNavigate();
    // handle form submit
-   const handleLogin = (e) => {
+   const handleLogin = async (e) => {
       e.preventDefault();
-      const email = e.target.email.value;
+      const username = e.target.username.value;
       const password = e.target.password.value;
 
-      console.log({email, password});
+      // fetch("https://studysphere-dnn6.onrender.com/accounts/user/login/", {
+      //    method: "POST",
+      //    headers: { "content-type": "application/json" },
+      //    body: JSON.stringify({ username, password }),
+      // })
+      //    .then((rest) => rest.json())
+      //    .then((data) => console.log(data));
+
+      try {
+         setLoading(true);
+         const response = await axios.post(
+            "https://studysphere-dnn6.onrender.com/accounts/user/login/",
+            { username, password }
+         );
+
+         if (response.status === 200) {
+            toast.success("login successfully.");
+            navigate("/profile");
+         } else {
+            toast.error("Something went wrong. Please try again.");
+         }
+      } catch (error) {
+         console.log(error);
+         toast.error("An error occurred. Please try again.");
+      } finally {
+         setLoading(false);
+      }
    };
+
+   if (loading) return <Loader />;
 
    return (
       <div className="flex flex-col max-w-md mx-auto shadow-md p-6 rounded-md sm:p-8 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
@@ -22,14 +55,14 @@ const Login = () => {
          <form onSubmit={handleLogin} className="space-y-12">
             <div className="space-y-4">
                <div>
-                  <label htmlFor="email" className="block mb-2 text-sm">
-                     Email address
+                  <label htmlFor="username" className="block mb-2 text-sm">
+                     Username
                   </label>
                   <input
-                     type="email"
-                     name="email"
-                     id="email"
-                     placeholder="leroy@jenkins.com"
+                     type="text"
+                     name="username"
+                     id="username"
+                     placeholder="username"
                      className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   />
                </div>
