@@ -1,7 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-// import { GoCheckCircleFill } from "react-icons/go";
+import LazyLoad from "react-lazyload";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 
 const TuitionDetails = () => {
@@ -11,11 +11,13 @@ const TuitionDetails = () => {
    return (
       <div className="p-2 mx-auto sm:p-10 md:p-16 bg-gray-800 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
          <div className="flex flex-col max-w-6xl mx-auto overflow-hidden rounded">
-            <img
-               src={tuition?.image}
-               alt="tuition image"
-               className="w-full h-60 sm:h-96 bg-gray-500 dark:bg-gray-500"
-            />
+            <LazyLoad once={true}>
+               <img
+                  src={tuition?.image}
+                  alt="tuition image"
+                  className="w-full h-60 sm:h-96 bg-gray-500 dark:bg-gray-500"
+               />
+            </LazyLoad>
             <div className="p-6 pb-12 m-4 mx-auto self-center -mt-16 space-y-6 shadow-sm lg:max-w-4xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-900 dark:bg-gray-50">
                <div className="space-y-2">
                   <a
