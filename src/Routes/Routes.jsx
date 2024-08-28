@@ -4,6 +4,7 @@ import Error from "../pages/Error";
 import Home from "../pages/Home";
 import Tuition from "../pages/Tuition";
 import TuitionDetails from "../Components/Sections/TuitionDetails";
+import Login from "../pages/Login";
 
 const router = createBrowserRouter([
    {
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
                fetch(
                   `https://studysphere-dnn6.onrender.com/tuitions/list/?id=${params.id}`
                ),
+         },
+
+         {
+            path: "/login",
+            element: <Login />,
          },
       ],
    },
