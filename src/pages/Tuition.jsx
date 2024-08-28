@@ -7,6 +7,7 @@ import Loader from "./Loader";
 
 const Tuition = () => {
    const [tuitions, setTuitions] = useState([]);
+   const [filteredData, setFilteredData] = useState([]);
    const [searchParams, setSearchParams] = useSearchParams();
    const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ const Tuition = () => {
                `https://studysphere-dnn6.onrender.com/tuitions/list/?page=${page}`
             );
             setTuitions(response.data.results);
+            setFilteredData(response.data.results);
             setTotalPages(Math.ceil(response.data.count / 9));
          } catch (error) {
             toast.error("Sorry, some error occurred.");
@@ -96,11 +98,61 @@ const Tuition = () => {
       return paginationItems;
    };
 
+   // handle filter by level instead of class
+   const handleFilterByLevel = (level) => {
+      if (level === "All") {
+         setFilteredData(tuitions);
+         navigate("/tuitions");
+      } else {
+         const filteredData = tuitions.filter((data) => data.level === level);
+         setFilteredData(filteredData);
+         navigate(`/tuitions/?page=${page}&filtered_by=${level}`);
+      }
+   };
+
+   // error state
+   
+
    if (tuitions < 1) return <Loader />;
    return (
       <>
+         <div className="mb-6 pb-4 border-b w-full text-end">
+            <div className="dropdown dropdown-hover dropdown-end">
+               <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn m-1 bg-[#FFC338] border-none hover:bg-[#e6b032]"
+               >
+                  Filter by level
+               </div>
+               <ul
+                  tabIndex={0}
+                  className="dropdown-content  menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+               >
+                  <li>
+                     <a onClick={() => handleFilterByLevel("All")}>All</a>
+                  </li>
+                  <li>
+                     <a onClick={() => handleFilterByLevel("Beginner")}>
+                        Beginner
+                     </a>
+                  </li>
+                  <li>
+                     <a onClick={() => handleFilterByLevel("Intermediate")}>
+                        Intermediate
+                     </a>
+                  </li>
+                  <li>
+                     <a onClick={() => handleFilterByLevel("Advanced")}>
+                        Advanced
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tuitions.map((tuition) => (
+            {filteredData.map((tuition) => (
                <TuitionCard key={tuition.id} tuition={tuition} />
             ))}
          </div>

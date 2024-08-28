@@ -12,7 +12,7 @@ const TuitionCard = ({ tuition }) => {
             />
             <div className="mt-6 mb-2 flex-1">
                <span className="block text-xs font-medium tracking-widest uppercase text-violet-400 dark:text-violet-600">
-                  {tuition?.subject}
+                  {tuition?.level}
                </span>
                <h2 className="text-xl font-semibold tracking-wide">
                   {tuition?.title}
