@@ -28,6 +28,11 @@ const Login = () => {
             { username, password }
          );
 
+         if (response.data.token && response.data.user_id) {
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user_id", response.data.user_id);
+         }
+         
          if (response.status === 200) {
             toast.success("login successfully.");
             navigate("/profile");
