@@ -7,6 +7,8 @@ import TuitionDetails from "../Components/Sections/TuitionDetails";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
+import PrivateRoute from "./PrivateRoute";
+import TuitionHistory from "../pages/TuitionHistory";
 
 const router = createBrowserRouter([
    {
@@ -41,7 +43,19 @@ const router = createBrowserRouter([
          },
          {
             path: "/profile",
-            element: <Profile />,
+            element: (
+               <PrivateRoute>
+                  <Profile />
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "/tuition_history",
+            element: (
+               <PrivateRoute>
+                  <TuitionHistory />
+               </PrivateRoute>
+            ),
          },
       ],
    },

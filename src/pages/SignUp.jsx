@@ -57,7 +57,7 @@ const SignUp = () => {
             toast.success(
                "Registration successful! Please check your email to confirm your account."
             );
-            navigate("/profile");
+            navigate("/");
          } else {
             toast.error("Something went wrong. Please try again.");
          }

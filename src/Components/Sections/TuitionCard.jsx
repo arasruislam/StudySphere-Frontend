@@ -6,13 +6,13 @@ const TuitionCard = ({ tuition }) => {
    return (
       <>
          <div className="max-w-md p-4 rounded-md shadow-md hover:scale-105 transition-all bg-gray-900 dark:bg-gray-50 text-gray-50 dark:text-gray-900 flex flex-col justify-between">
-            <lazyLoad once={true}>
+            <LazyLoad once={true}>
                <img
                   src={tuition?.image}
                   alt=""
                   className="object-cover object-center w-full rounded-md h-72 bg-gray-500 dark:bg-gray-500 shadow-md"
                />
-            </lazyLoad>
+            </LazyLoad>
             <div className="mt-6 mb-2 flex-1">
                <span className="block text-xs font-medium tracking-widest uppercase text-violet-400 dark:text-violet-600">
                   {tuition?.level}

@@ -73,6 +73,21 @@ const Header = () => {
                Contact Us
             </NavLink>
          </li>
+         {/* conditional nav item */}
+         {token && (
+            <li>
+               <NavLink
+                  to="/tuition_history"
+                  className={({ isActive }) =>
+                     isActive
+                        ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                        : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+                  }
+               >
+                  Tuition History
+               </NavLink>
+            </li>
+         )}
       </>
    );
 
@@ -93,16 +108,13 @@ const Header = () => {
                   </NavLink>
                </li>
                <li>
-                  <NavLink
+                  <a
                      onClick={handleLogout}
-                     className={({ isActive }) =>
-                        isActive
-                           ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
-                           : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
-                     }
+                     to="#"
+                     className="transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
                   >
                      logout
-                  </NavLink>
+                  </a>
                </li>
             </>
          ) : (

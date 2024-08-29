@@ -20,7 +20,6 @@ const Profile = () => {
          .then((res) => res.json())
          .then((data) => setUserData(data[0]));
    }, []);
-   console.log(userData);
 
    return (
       <div className="flex flex-col items-start lg:flex-row gap-6">

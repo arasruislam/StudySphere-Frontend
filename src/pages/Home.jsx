@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import Hero from "../Components/Sections/Hero";
 import Loader from "./Loader";
+import { AuthContext } from "../Layouts/Primary";
 
 const Home = () => {
+
    return (
       <>
          {/* Hero section */}
