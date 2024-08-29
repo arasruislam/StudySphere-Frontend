@@ -23,7 +23,7 @@ const Primary = () => {
 
    return (
       <>
-         <AuthContext.Provider value={{ userData, token }}>
+         <AuthContext.Provider value={{ userData, token, user_id }}>
             <Header />
             <Container>
                <div className="min-h-[calc(100vh-124px)] pt-24 mb-8">

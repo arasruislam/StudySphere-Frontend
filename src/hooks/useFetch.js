@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 export const useFetch = ({ url }) => {
    const [data, setData] = useState([]);
-   // const Url = baseUrl;
 
    useEffect(() => {
       fetch(url)

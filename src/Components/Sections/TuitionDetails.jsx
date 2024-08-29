@@ -6,9 +6,10 @@ import { MdCancel, MdCheckCircle } from "react-icons/md";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Layouts/Primary";
 import { useFetch } from "../../hooks/useFetch";
+import axios from "axios";
 
 const TuitionDetails = () => {
-   const { userData, token } = useContext(AuthContext);
+   const { userData, token, user_id } = useContext(AuthContext);
    const UserSingleData = useLoaderData();
    const tuition = UserSingleData.results[0];
 
@@ -18,10 +19,57 @@ const TuitionDetails = () => {
    });
 
    console.log(applications);
+   // console.log(tuition);
+   // console.log(userData);
 
-   const handleApplyTuition = () => {
+   const handleApplyTuition = async () => {
       if (!token) return toast.error("Sorry! Your are not logged in user");
-      toast.success("clicked!");
+      const isExits = applications.find(
+         (application) => application.tuition === tuition.id
+      );
+      if (isExits) return toast.error("Already enrolled.");
+
+      try {
+         const response = await fetch(
+            "https://studysphere-dnn6.onrender.com/tuitions/applications/",
+            {
+               method: "POST",
+               headers: {
+                  Authorization: `Token ${token}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify({
+                  user: user_id,
+                  tuition: tuition.id,
+               }),
+            }
+         );
+
+         if (!response.ok) {
+            throw new Error("Something went wrong");
+         }
+
+         const data = await response.json();
+         console.log("Application successful:", data);
+         // সফল হলে UI আপডেট করতে পারেন
+      } catch (error) {
+         console.error("Error applying for tuition:", error.message);
+         // ত্রুটি হলে error message দেখাতে পারেন
+      }
+
+      // fetch("https://studysphere-dnn6.onrender.com/tuitions/applications/", {
+      //    method: "POST",
+      //    headers: {
+      //       Authorization: `Token ${token}`,
+      //       "Content-Type": "application/json",
+      //    },
+      //    body: JSON.stringify({
+      //       user: user_id,
+      //       tuition: tuition.id,
+      //    }),
+      // })
+      //    .then((res) => res.json())
+      //    .then((data) => console.log(data));
    };
 
    return (
