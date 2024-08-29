@@ -1,9 +1,40 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "../Container/Container";
 import logo from "../../Assets/logo.png";
 import userImage from "../../Assets/user.png";
+import axios from "axios";
+import Loader from "../../pages/Loader";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Header = () => {
+   const [loading, setLoading] = useState(false);
+   const navigate = useNavigate();
+   const token = localStorage.getItem("token");
+
+   // logout
+   const handleLogout = async () => {
+      try {
+         setLoading(true);
+         fetch("https://studysphere-dnn6.onrender.com/accounts/user/logout/", {
+            method: "POST",
+            headers: {
+               Authorization: `Token ${token}`,
+               "Content-Type": "application/json",
+            },
+         })
+            .then((res) => res.json())
+            .then((data) => {
+               console.log(data);
+               localStorage.removeItem("token");
+               localStorage.removeItem("user_id");
+            });
+      } finally {
+         setLoading(false);
+         toast.success("logout successfully.");
+      }
+   };
+
    const navItems = (
       <>
          <li>
@@ -44,6 +75,36 @@ const Header = () => {
          </li>
       </>
    );
+
+   const authenticationItems = (
+      <>
+         {token ? (
+            <>
+               <li>
+                  <Link to="/profile" className="justify-between">
+                     Profile
+                  </Link>
+               </li>
+               <li>
+                  <Link onClick={handleLogout} className="justify-between">
+                     logout
+                  </Link>
+               </li>
+            </>
+         ) : (
+            <>
+               <li>
+                  <Link to="/login">Log in</Link>
+               </li>
+               <li>
+                  <Link to="/signUp">Sign Up</Link>
+               </li>
+            </>
+         )}
+      </>
+   );
+
+   if (loading) return <Loader />;
 
    return (
       <>
@@ -134,22 +195,7 @@ const Header = () => {
                            <span className="border-b pb-2 mb-2 block lg:hidden">
                               {navItems}
                            </span>
-                           <li>
-                              <Link to="/profile" className="justify-between">
-                                 Profile
-                              </Link>
-                           </li>
-                           <li>
-                              <Link to="/login">Log in</Link>
-                           </li>
-                           <li>
-                              <Link to="/signUp">Sign Up</Link>
-                           </li>
-                           <li>
-                              <Link to="/logout" className="justify-between">
-                                 logout
-                              </Link>
-                           </li>
+                           {authenticationItems}
                         </ul>
                      </div>
                   </div>
