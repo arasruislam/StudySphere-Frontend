@@ -5,13 +5,19 @@ import LazyLoad from "react-lazyload";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Layouts/Primary";
+import { useFetch } from "../../hooks/useFetch";
 
 const TuitionDetails = () => {
    const { userData, token } = useContext(AuthContext);
-   const data = useLoaderData();
-   const tuition = data.results[0];
+   const UserSingleData = useLoaderData();
+   const tuition = UserSingleData.results[0];
 
-   console.log(tuition);
+   // data fetching
+   const [applications] = useFetch({
+      url: "https://studysphere-dnn6.onrender.com/tuitions/applications/",
+   });
+
+   console.log(applications);
 
    const handleApplyTuition = () => {
       if (!token) return toast.error("Sorry! Your are not logged in user");
@@ -87,10 +93,7 @@ const TuitionDetails = () => {
                         Apply Now
                      </button>
                   ) : (
-                     <button
-                        className="btn btn-warning"
-                        disabled
-                     >
+                     <button className="btn btn-warning" disabled>
                         Apply Now
                      </button>
                   )}

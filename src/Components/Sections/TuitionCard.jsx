@@ -5,7 +5,9 @@ import LazyLoad from "react-lazyload";
 const TuitionCard = ({ tuition }) => {
    return (
       <>
-         <Link to={`/tuitions/${tuition.id}`} className="max-w-md p-4 rounded-md shadow-md hover:scale-105 transition-all bg-gray-900 dark:bg-gray-50 text-gray-50 dark:text-gray-900 flex flex-col justify-between">
+         <div
+            className="max-w-md p-4 rounded-md shadow-md hover:scale-105 transition-all bg-gray-900 dark:bg-gray-50 text-gray-50 dark:text-gray-900 flex flex-col justify-between"
+         >
             <LazyLoad once={true}>
                <img
                   src={tuition?.image}
@@ -32,7 +34,7 @@ const TuitionCard = ({ tuition }) => {
                   See Details
                </Link>
             </div>
-         </Link>
+         </div>
       </>
    );
 };
