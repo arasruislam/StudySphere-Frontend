@@ -25,12 +25,12 @@ const Header = () => {
          })
             .then((res) => res.json())
             .then((data) => {
-               console.log(data);
                localStorage.removeItem("token");
                localStorage.removeItem("user_id");
             });
       } finally {
          setLoading(false);
+         navigate("/login")
          toast.success("logout successfully.");
       }
    };
