@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
+import ApplicationTable from "../Components/Sections/ApplicationTable";
 
 const TuitionHistory = () => {
    return (
-      <div>
-         History
-      </div>
+      <>
+      {/* all application in table */}
+         <ApplicationTable />
+      </>
    );
 };
 
