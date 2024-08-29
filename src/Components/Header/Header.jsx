@@ -135,13 +135,20 @@ const Header = () => {
                               {navItems}
                            </span>
                            <li>
-                              <Link to="/profile" className="justify-between">Profile</Link>
+                              <Link to="/profile" className="justify-between">
+                                 Profile
+                              </Link>
                            </li>
                            <li>
                               <Link to="/login">Log in</Link>
                            </li>
                            <li>
                               <Link to="/signUp">Sign Up</Link>
+                           </li>
+                           <li>
+                              <Link to="/logout" className="justify-between">
+                                 logout
+                              </Link>
                            </li>
                         </ul>
                      </div>
