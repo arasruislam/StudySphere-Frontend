@@ -1,14 +1,15 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "../Container/Container";
 import logo from "../../Assets/logo.png";
-import userImage from "../../Assets/user.png";
-import axios from "axios";
+import demoImg from "../../Assets/user.png";
 import Loader from "../../pages/Loader";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Layouts/Primary";
 
 const Header = () => {
    const [loading, setLoading] = useState(false);
+   const { userData } = useContext(AuthContext);
    const navigate = useNavigate();
    const token = localStorage.getItem("token");
 
@@ -30,7 +31,7 @@ const Header = () => {
             });
       } finally {
          setLoading(false);
-         navigate("/login")
+         navigate("/login");
          toast.success("logout successfully.");
       }
    };
@@ -223,12 +224,12 @@ const Header = () => {
                         <div
                            tabIndex={0}
                            role="button"
-                           className="btn btn-ghost btn-circle avatar"
+                           className="btn btn-ghost btn-circle avatar hover:border-[#3890d8]"
                         >
                            <div className="w-10 rounded-full">
                               <img
                                  alt="Tailwind CSS Navbar component"
-                                 src={userImage}
+                                 src={userData?.profile_image || demoImg}
                               />
                            </div>
                         </div>

@@ -1,16 +1,16 @@
 import moment from "moment";
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Layouts/Primary";
 import { useFetch } from "../../hooks/useFetch";
-import axios from "axios";
 
 const TuitionDetails = () => {
-   const { userData, token, user_id } = useContext(AuthContext);
+   const { token, user_id } = useContext(AuthContext);
    const UserSingleData = useLoaderData();
+   const navigate = useNavigate()
    const tuition = UserSingleData.results[0];
 
    // data fetching
@@ -18,17 +18,15 @@ const TuitionDetails = () => {
       url: "https://studysphere-dnn6.onrender.com/tuitions/applications/",
    });
 
-   console.log(applications);
-   // console.log(tuition);
-   // console.log(userData);
-
    const handleApplyTuition = async () => {
+      // error handle
       if (!token) return toast.error("Sorry! Your are not logged in user");
       const isExits = applications.find(
          (application) => application.tuition === tuition.id
       );
       if (isExits) return toast.error("Already enrolled.");
 
+      // apply
       try {
          const response = await fetch(
             "https://studysphere-dnn6.onrender.com/tuitions/applications/",
@@ -46,30 +44,15 @@ const TuitionDetails = () => {
          );
 
          if (!response.ok) {
-            throw new Error("Something went wrong");
+            toast.error("Something went wrong! try again");
          }
 
          const data = await response.json();
-         console.log("Application successful:", data);
-         // সফল হলে UI আপডেট করতে পারেন
+         navigate("/tuition_history");
+         toast.success("applied tuition successfully");
       } catch (error) {
-         console.error("Error applying for tuition:", error.message);
-         // ত্রুটি হলে error message দেখাতে পারেন
+         toast.error(error.message);
       }
-
-      // fetch("https://studysphere-dnn6.onrender.com/tuitions/applications/", {
-      //    method: "POST",
-      //    headers: {
-      //       Authorization: `Token ${token}`,
-      //       "Content-Type": "application/json",
-      //    },
-      //    body: JSON.stringify({
-      //       user: user_id,
-      //       tuition: tuition.id,
-      //    }),
-      // })
-      //    .then((res) => res.json())
-      //    .then((data) => console.log(data));
    };
 
    return (
