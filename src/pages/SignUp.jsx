@@ -38,11 +38,11 @@ const SignUp = () => {
          return;
       }
       if (!/(?=.*[A-Z])/.test(password)) {
-         toast.error("at least one upper case");
+         toast.error("at least one uppercase to your password");
          return;
       }
       if (!/(?=.*[@$!%*?&])/.test(password)) {
-         toast.error("at least one special character");
+         toast.error("at least one special character to your password");
          return;
       }
 

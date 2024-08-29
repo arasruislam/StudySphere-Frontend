@@ -81,23 +81,55 @@ const Header = () => {
          {token ? (
             <>
                <li>
-                  <Link to="/profile" className="justify-between">
+                  <NavLink
+                     to="/profile"
+                     className={({ isActive }) =>
+                        isActive
+                           ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                           : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+                     }
+                  >
                      Profile
-                  </Link>
+                  </NavLink>
                </li>
                <li>
-                  <Link onClick={handleLogout} className="justify-between">
+                  <NavLink
+                     onClick={handleLogout}
+                     className={({ isActive }) =>
+                        isActive
+                           ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                           : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+                     }
+                  >
                      logout
-                  </Link>
+                  </NavLink>
                </li>
             </>
          ) : (
             <>
                <li>
-                  <Link to="/login">Log in</Link>
+                  <NavLink
+                     to="/login"
+                     className={({ isActive }) =>
+                        isActive
+                           ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                           : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+                     }
+                  >
+                     Log in
+                  </NavLink>
                </li>
                <li>
-                  <Link to="/signUp">Sign Up</Link>
+                  <NavLink
+                     to="/signUp"
+                     className={({ isActive }) =>
+                        isActive
+                           ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                           : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+                     }
+                  >
+                     Sign Up
+                  </NavLink>
                </li>
             </>
          )}
@@ -190,7 +222,7 @@ const Header = () => {
                         </div>
                         <ul
                            tabIndex={0}
-                           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2"
                         >
                            <span className="border-b pb-2 mb-2 block lg:hidden">
                               {navItems}
