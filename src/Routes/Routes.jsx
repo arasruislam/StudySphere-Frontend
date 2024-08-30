@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import PrivateRoute from "./PrivateRoute";
 import TuitionHistory from "../pages/TuitionHistory";
 import Review from "../pages/Review";
+import ChangePassword from "../pages/ChangePassword";
 
 const router = createBrowserRouter([
    {
@@ -69,6 +70,14 @@ const router = createBrowserRouter([
                fetch(
                   `https://studysphere-dnn6.onrender.com/tuitions/all/?id=${params.id}`
                ),
+         },
+         {
+            path: "/change_password",
+            element: (
+               <PrivateRoute>
+                  <ChangePassword />
+               </PrivateRoute>
+            ),
          },
       ],
    },
