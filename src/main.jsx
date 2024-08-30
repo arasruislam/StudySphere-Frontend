@@ -7,6 +7,6 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById("root")).render(
    <>
       <RouterProvider router={router} />
-      <Toaster />
+      <Toaster position="bottom-center" reverseOrder={false} />
    </>
 );

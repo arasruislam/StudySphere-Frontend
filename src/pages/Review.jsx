@@ -29,7 +29,7 @@ const Review = () => {
       try {
          setLoading(true);
          const response = await fetch(
-            "http://studysphere-dnn6.onrender.com/tuitions/reviews/",
+            "https://studysphere-dnn6.onrender.com/tuitions/reviews/",
             {
                method: "POST",
                headers: {
