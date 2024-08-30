@@ -8,6 +8,7 @@ const SignUp = () => {
    const navigate = useNavigate();
    const [loading, setLoading] = useState(false);
 
+   // sign up user handler
    const handleSignUpUser = async (e) => {
       e.preventDefault();
 
@@ -62,22 +63,10 @@ const SignUp = () => {
             toast.error("Something went wrong. Please try again.");
          }
       } catch (error) {
-         console.log(error);
          toast.error("An error occurred. Please try again.");
       } finally {
          setLoading(false);
       }
-
-      // fetch(
-      //    "https://studysphere-dnn6.onrender.com/accounts/new_user/register/",
-      //    {
-      //       method: "POST",
-      //       headers: { "content-type": "application/json" },
-      //       body: JSON.stringify(newUser),
-      //    }
-      // )
-      //    .then((rest) => rest.json())
-      //    .then((data) => console.log(data));
 
    };
 
