@@ -9,6 +9,7 @@ import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import PrivateRoute from "./PrivateRoute";
 import TuitionHistory from "../pages/TuitionHistory";
+import Review from "../pages/Review";
 
 const router = createBrowserRouter([
    {
@@ -56,6 +57,18 @@ const router = createBrowserRouter([
                   <TuitionHistory />
                </PrivateRoute>
             ),
+         },
+         {
+            path: "/review:id",
+            element: (
+               <PrivateRoute>
+                  <Review />
+               </PrivateRoute>
+            ),
+            loader: ({ params }) =>
+               fetch(
+                  `https://studysphere-dnn6.onrender.com/tuitions/list/?id=${params.id}`
+               ),
          },
       ],
    },

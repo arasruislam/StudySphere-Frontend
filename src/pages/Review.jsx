@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const Review = () => {
-   return (
-      <div>
-         
-      </div>
-   );
+   // const loader = useLoaderData();
+   // console.log(loader);
+   return <div>review page</div>;
 };
 
 export default Review;

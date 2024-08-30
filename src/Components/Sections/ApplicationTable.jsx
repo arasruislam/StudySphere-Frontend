@@ -2,24 +2,26 @@ import moment from "moment";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
+import toast from "react-hot-toast";
 
 const ApplicationTable = ({ filteredApplication }) => {
    const tuitions = useFetch({
-      url: `https://studysphere-dnn6.onrender.com/tuitions/list/`,
+      url: `https://studysphere-dnn6.onrender.com/tuitions/all/`,
    });
-   console.log(tuitions[0].results);
+
    const getTuitionTitle = (tuitionId) => {
-      const tuition = tuitions[0].results?.find((t) => t.id === tuitionId);
+      const tuition = tuitions[0]?.find((t) => t.id === tuitionId);
       return tuition ? tuition.title : "N/A";
    };
+
 
    return (
       <div className="mx-auto dark:text-gray-800">
          <h2 className="mb-4 text-2xl font-semibold leading-tight">
             All Applied Tuitions
          </h2>
-         <div className="overflow-x-auto">
-            <table className="min-w-full text-xs">
+         <div className="overflow-x-scroll">
+            <table className="w-full text-xs">
                <thead className="bg-gray-300 text-center">
                   <tr className="text-left">
                      <th className="p-3">No.</th>
@@ -66,7 +68,7 @@ const ApplicationTable = ({ filteredApplication }) => {
                         <td className="p-3">
                            {application.is_approved ? (
                               <Link
-                                 to="/"
+                                 to={`/review/${application.tuition}`}
                                  className="btn border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#47a8f6] hover:border-[#47a8f6] text-white btn-sm"
                               >
                                  Submit Review
