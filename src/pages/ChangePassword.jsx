@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const ChangePassword = () => {
+   const [watchPassword, setWatchPassword] = useState(false);
+
    const handleChangePassword = async (e) => {
       e.preventDefault();
 
@@ -21,8 +24,8 @@ const ChangePassword = () => {
             {
                method: "POST",
                headers: {
-                  "Content-Type": "application/json",
                   Authorization: `Token ${localStorage.getItem("token")}`,
+                  "Content-Type": "application/json",
                },
                body: JSON.stringify({
                   old_password: old_password,
@@ -61,11 +64,17 @@ const ChangePassword = () => {
                </label>
                <input
                   id="old_password"
-                  type="password"
+                  type={watchPassword ? "text" : "password"}
                   name="old_password"
                   className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   required
                />
+               <span
+                  onClick={() => setWatchPassword(!watchPassword)}
+                  className=" cursor-pointer"
+               >
+                  see
+               </span>
             </div>
             <div className="mb-4">
                <label
@@ -76,11 +85,17 @@ const ChangePassword = () => {
                </label>
                <input
                   id="new_password"
-                  type="password"
+                  type={watchPassword ? "text" : "password"}
                   name="new_password"
                   className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   required
                />
+               <span
+                  onClick={() => setWatchPassword(!watchPassword)}
+                  className=" cursor-pointer"
+               >
+                  see
+               </span>
             </div>
             <div className="mb-4">
                <label
@@ -91,11 +106,17 @@ const ChangePassword = () => {
                </label>
                <input
                   id="confirm_password"
-                  type="password"
+                  type={watchPassword ? "text" : "password"}
                   name="confirm_password"
                   className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   required
                />
+               <span
+                  onClick={() => setWatchPassword(!watchPassword)}
+                  className=" cursor-pointer"
+               >
+                  see
+               </span>
             </div>
             <div className="flex items-center justify-between">
                <button
