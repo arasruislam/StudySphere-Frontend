@@ -18,6 +18,7 @@ const TuitionDetails = () => {
       url: "https://studysphere-dnn6.onrender.com/tuitions/applications/",
    });
 
+   // handle tuition application
    const handleApplyTuition = async () => {
       // error handle
       if (!token) return toast.error("Sorry! Your are not logged in user");
