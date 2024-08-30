@@ -1,21 +1,71 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const Review = () => {
+   const [loading, setLoading] = useState(false);
+   const navigate = useNavigate();
    const loader = useLoaderData();
-   console.log(loader);
+   const token = localStorage.getItem("token");
+   const user_id = localStorage.getItem("user_id");
+   const id = loader[0].id;
 
-   const handleSubmitReview = (e) => {
+   // console.log({token, user_id, id});
+
+   const handleSubmitReview = async (e) => {
       e.preventDefault();
       const body = e.target.body.value;
       const rating = e.target.rating.value;
+
       // review data
       const reviewData = {
-         // reviewer:
+         reviewer: JSON.parse(user_id),
+         tuition: loader[0].id,
          body: body,
-         rating: rating
+         rating: rating,
+      };
+
+      try {
+         setLoading(true);
+         const response = await fetch(
+            "http://studysphere-dnn6.onrender.com/tuitions/reviews/",
+            {
+               method: "POST",
+               headers: {
+                  Authorization: `Token ${token}`,
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify(reviewData),
+            }
+         );
+
+         if (response.ok) {
+            toast.success("Thanks for you review.");
+            navigate("/");
+         } else {
+            toast.error("Failed to submit the review.");
+         }
+      } catch (error) {
+         toast.error("An error occurred while submitting the review.");
+      } finally {
+         setLoading(false);
       }
+
+      // fetch("http://studysphere-dnn6.onrender.com/tuitions/reviews/", {
+      //    method: "POST",
+      //    headers: {
+      //       Authorization: `Token ${token}`,
+      //       "Content-Type": "application/json",
+      //    },
+      //    body: JSON.stringify(reviewData),
+      // })
+      //    .then((res) => res.json())
+      //    .then((data) => console.log(data));
+   
    };
+
+   if (loading) return <Loader />;
 
    return (
       <div className="max-w-xl mx-auto mt-8 p-6 bg-gray-50 shadow-md rounded-lg ">
@@ -59,11 +109,6 @@ const Review = () => {
                   Submit Review
                </button>
             </div>
-            {/* {message && (
-               <p className="text-center mt-4 text-sm font-medium text-green-600 dark:text-green-400">
-                  {message}
-               </p>
-            )} */}
          </form>
       </div>
    );
