@@ -7,19 +7,12 @@ import toast from "react-hot-toast";
 const Login = () => {
    const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
+   
    // handle form submit
    const handleLogin = async (e) => {
       e.preventDefault();
       const username = e.target.username.value;
       const password = e.target.password.value;
-
-      // fetch("https://studysphere-dnn6.onrender.com/accounts/user/login/", {
-      //    method: "POST",
-      //    headers: { "content-type": "application/json" },
-      //    body: JSON.stringify({ username, password }),
-      // })
-      //    .then((rest) => rest.json())
-      //    .then((data) => console.log(data));
 
       try {
          setLoading(true);
@@ -40,7 +33,6 @@ const Login = () => {
             toast.error("Something went wrong. Please try again.");
          }
       } catch (error) {
-         console.log(error);
          toast.error("An error occurred. Please try again.");
       } finally {
          setLoading(false);
