@@ -59,7 +59,7 @@ const router = createBrowserRouter([
             ),
          },
          {
-            path: "/review:id",
+            path: "/review/:id",
             element: (
                <PrivateRoute>
                   <Review />
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
             ),
             loader: ({ params }) =>
                fetch(
-                  `https://studysphere-dnn6.onrender.com/tuitions/list/?id=${params.id}`
+                  `https://studysphere-dnn6.onrender.com/tuitions/all/?id=${params.id}`
                ),
          },
       ],
