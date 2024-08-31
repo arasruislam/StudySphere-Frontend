@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const ChangePassword = () => {
-   const [watchPassword, setWatchPassword] = useState(false);
+   const [watchOldPassword, setWatchOldPassword] = useState(false);
+   const [watchNewPassword, setWatchNewPassword] = useState(false);
+   const [watchConfirmPassword, setWatchConfirmPassword] = useState(false);
 
    const handleChangePassword = async (e) => {
       e.preventDefault();
@@ -57,66 +60,68 @@ const ChangePassword = () => {
          >
             <div className="mb-4">
                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className=" text-gray-700 text-sm font-bold mb-2 flex gap-2 items-center"
                   htmlFor="old_password"
                >
-                  Old Password
+                  <span>Old Password</span>
+                  <span
+                     onClick={() => setWatchOldPassword(!watchOldPassword)}
+                     className=" cursor-pointer"
+                  >
+                     {watchOldPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </span>
                </label>
                <input
                   id="old_password"
-                  type={watchPassword ? "text" : "password"}
+                  type={watchOldPassword ? "text" : "password"}
                   name="old_password"
                   className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   required
                />
-               <span
-                  onClick={() => setWatchPassword(!watchPassword)}
-                  className=" cursor-pointer"
-               >
-                  see
-               </span>
             </div>
             <div className="mb-4">
                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className=" text-gray-700 text-sm font-bold mb-2 flex gap-2 items-center"
                   htmlFor="new_password"
                >
-                  New Password
+                  <span>New Password</span>
+                  <span
+                     onClick={() => setWatchNewPassword(!watchNewPassword)}
+                     className=" cursor-pointer"
+                  >
+                     {watchNewPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </span>
                </label>
                <input
                   id="new_password"
-                  type={watchPassword ? "text" : "password"}
+                  type={watchNewPassword ? "text" : "password"}
                   name="new_password"
                   className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   required
                />
-               <span
-                  onClick={() => setWatchPassword(!watchPassword)}
-                  className=" cursor-pointer"
-               >
-                  see
-               </span>
             </div>
             <div className="mb-4">
                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className=" text-gray-700 text-sm font-bold mb-2 flex gap-2 items-center"
                   htmlFor="confirm_password"
                >
-                  Confirm Password
+                  <span>Confirm Password</span>
+                  <span
+                     onClick={() =>
+                        setWatchConfirmPassword(!watchConfirmPassword)
+                     }
+                     className=" cursor-pointer"
+                  >
+                     {watchConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </span>
                </label>
                <input
                   id="confirm_password"
-                  type={watchPassword ? "text" : "password"}
+                  type={watchConfirmPassword ? "text" : "password"}
                   name="confirm_password"
                   className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                   required
                />
-               <span
-                  onClick={() => setWatchPassword(!watchPassword)}
-                  className=" cursor-pointer"
-               >
-                  see
-               </span>
             </div>
             <div className="flex items-center justify-between">
                <button
