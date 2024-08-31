@@ -16,7 +16,7 @@ const ApplicationTable = ({ filteredApplication }) => {
 
 
    return (
-      <div className="mx-auto dark:text-gray-800">
+      <div className="mx-auto dark:text-gray-800 ">
          <h2 className="mb-4 text-2xl font-semibold leading-tight">
             All Applied Tuitions
          </h2>
