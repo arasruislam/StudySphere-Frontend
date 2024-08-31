@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import TuitionHistory from "../pages/TuitionHistory";
 import Review from "../pages/Review";
 import ChangePassword from "../pages/ChangePassword";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
    {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
          {
             path: "/signUp",
             element: <SignUp />,
+         },
+         {
+            path: "/contact_us",
+            element: <Contact />,
          },
          {
             path: "/profile",
