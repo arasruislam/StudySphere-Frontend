@@ -1,36 +1,30 @@
-# StudySphere
+# StudySphere Frontend
 
-Welcome to **StudySphere**, your gateway to academic excellence. StudySphere is an innovative tuition platform designed to connect students with top-tier tutors, offering personalized and interactive online education tailored to individual needs.
+Welcome to the StudySphere Frontend repository! This project provides a seamless, engaging, and responsive user interface for the StudySphere platform, a comprehensive solution for finding and applying to the best tuitions.
 
-## Key Features
+## 🎯 Project Description
 
-- **User Registration and Authentication**
-  - Implement a robust user registration and login system.
-  - Email verification for account activation upon registration.
-  - Secure user authentication process.
+The StudySphere Frontend application is built with React and Tailwind CSS, designed to deliver an intuitive and modern user experience. It features a responsive layout and integrates advanced functionalities to facilitate easy navigation, application, and profile management.
 
-- **Add Tuition**
-  - Admin can add new tuition sessions to the system.
-  - Admin can edit or delete tuition details and manage availability.
+## 🌟 Key Features
 
-- **Users Profile**
-  - Display user information such as name and applied tuition history.
-  - Allow users to change their passwords for enhanced security.
+- **Responsive Design**: Adapts to various devices and screen sizes.
+- **Interactive Animations**: Utilizes `lottie-react` for engaging animations.
+- **Real-time Notifications**: Provides instant feedback with `react-hot-toast`.
+- **Smooth Navigation**: Handles routing and transitions using `react-router-dom`.
+- **Optimized Performance**: Implements lazy loading and performance enhancements.
 
-- **Filter**
-  - Users can filter available tuition sessions by class for easy navigation.
+## 🚀 Technologies & Tools
 
-- **Apply for Tuition**
-  - Allow users to apply for tuition sessions directly from the tuition details page.
-  - Admin can view all applicants for a tuition session and select the best candidate.
-  - Selected tuition sessions are added to the applicant's profile.
-
-- **Tuition Reviews**
-  - Users can leave reviews for tuition sessions they have attended.
-  - Reviews are enabled only after an applicant has been selected for the tuition.
-
-## Technology Stack
-
-- **Backend**: Django Rest Framework
-- **Frontend**: React.js
-- **Styling**: Tailwind CSS
+- **React**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Vite**: Build tool for a fast development environment and optimized production builds.
+- **Firebase**: For user authentication and backend services.
+- **Lottie-React**: For rendering animations.
+- **Axios**: For making HTTP requests.
+- **Moment**: For date and time manipulation.
+- **React-Hot-Toast**: For real-time notifications.
+- **React-Lazyload**: For lazy loading components to improve performance.
+- **DaisyUI**: Tailwind CSS component library for additional styling options.
+- **ESLint**: For identifying and reporting on patterns in JavaScript code.
+- **PostCSS**: For transforming CSS with JavaScript plugins.
