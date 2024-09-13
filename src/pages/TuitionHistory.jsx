@@ -5,17 +5,15 @@ import { useFetch } from "../hooks/useFetch";
 
 const TuitionHistory = () => {
    const { user_id } = useContext(AuthContext);
-   const data = useFetch({
-      url: "https://studysphere-dnn6.onrender.com/tuitions/applications/",
+
+   const [data] = useFetch({
+      url: `https://studysphere-dnn6.onrender.com/api/tuitions/applications/?student=${user_id}`,
    });
-   const filteredApplication = data[0].filter(
-      (application) => application.user === JSON.parse(user_id)
-   );
 
    return (
       <>
          {/* all application in table */}
-         <ApplicationTable filteredApplication={filteredApplication} />
+         <ApplicationTable data={data} />
       </>
    );
 };

@@ -23,7 +23,7 @@ const ChangePassword = () => {
       // Send POST request to change password
       try {
          const response = await fetch(
-            "https://studysphere-dnn6.onrender.com/accounts/user/change_password/",
+            "http://127.0.0.1:8000/accounts/user/change_password/",
             {
                method: "POST",
                headers: {

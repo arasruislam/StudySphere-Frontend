@@ -6,12 +6,9 @@ import Loader from "./Loader";
 const Review = () => {
    const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
-   const loader = useLoaderData();
+   const tuition = useLoaderData();
    const token = localStorage.getItem("token");
-   const user_id = localStorage.getItem("user_id");
-   const id = loader[0].id;
-
-   // console.log({token, user_id, id});
+   const user_id = localStorage.getItem("student_id");
 
    const handleSubmitReview = async (e) => {
       e.preventDefault();
@@ -21,7 +18,7 @@ const Review = () => {
       // review data
       const reviewData = {
          reviewer: JSON.parse(user_id),
-         tuition: loader[0].id,
+         tuition: tuition.id,
          body: body,
          rating: rating,
       };
@@ -29,7 +26,7 @@ const Review = () => {
       try {
          setLoading(true);
          const response = await fetch(
-            "https://studysphere-dnn6.onrender.com/tuitions/reviews/",
+            "https://studysphere-dnn6.onrender.com/api/tuitions/reviews/",
             {
                method: "POST",
                headers: {
@@ -39,6 +36,8 @@ const Review = () => {
                body: JSON.stringify(reviewData),
             }
          );
+
+         console.log(response);
 
          if (response.ok) {
             toast.success("Thanks for you review.");
@@ -51,17 +50,6 @@ const Review = () => {
       } finally {
          setLoading(false);
       }
-
-      // fetch("http://studysphere-dnn6.onrender.com/tuitions/reviews/", {
-      //    method: "POST",
-      //    headers: {
-      //       Authorization: `Token ${token}`,
-      //       "Content-Type": "application/json",
-      //    },
-      //    body: JSON.stringify(reviewData),
-      // })
-      //    .then((res) => res.json())
-      //    .then((data) => console.log(data));
    
    };
 

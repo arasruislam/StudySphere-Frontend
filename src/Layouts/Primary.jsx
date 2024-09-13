@@ -4,22 +4,19 @@ import Footer from "../Components/Footer/Footer";
 import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import Loader from "../pages/Loader";
 import { createContext, useEffect, useState } from "react";
+import { useFetch } from "../hooks/useFetch";
 
 export const AuthContext = createContext(null);
 
 const Primary = () => {
-   const [userData, setUserData] = useState([]);
+   // const [userData, setUserData] = useState([]);
    const navigation = useNavigation();
-   const user_id = localStorage.getItem("user_id");
+   const user_id = JSON.parse(localStorage.getItem("student_id"));
    const token = localStorage.getItem("token");
 
-   useEffect(() => {
-      fetch(
-         `https://studysphere-dnn6.onrender.com/accounts/?user_id=${user_id}`
-      )
-         .then((res) => res.json())
-         .then((data) => setUserData(data[0]));
-   }, []);
+   const [userData] = useFetch({
+      url: `https://studysphere-dnn6.onrender.com/api/student/list/${user_id}`,
+   });
 
    return (
       <>

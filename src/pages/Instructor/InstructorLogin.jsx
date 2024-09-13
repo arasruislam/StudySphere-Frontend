@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "./Loader";
-import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import axios from "axios";
+import Loader from "../Loader";
 
-const Login = () => {
+const InstructorLogin = () => {
    const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
 
@@ -17,13 +17,14 @@ const Login = () => {
       try {
          setLoading(true);
          const response = await axios.post(
-            "https://studysphere-dnn6.onrender.com/api/student/login/",
+            "https://studysphere-dnn6.onrender.com/api/instructor/login/",
             { username, password }
          );
 
-         if (response.data.token && response.data.student_id) {
+         if (response.data.token && response.data.instructor_id) {
             localStorage.setItem("token", response.data.token);
-            localStorage.setItem("student_id", response.data.student_id);
+            localStorage.setItem("instructor_id", response.data.instructor_id);
+            localStorage.setItem("role", "instructor");
          }
 
          if (response.status === 200) {
@@ -48,10 +49,10 @@ const Login = () => {
             <p className="text-sm text-gray-400 dark:text-gray-600">
                Sign in as{" "}
                <Link
-                  to="/instructor_login"
+                  to="/login"
                   className="hover:underline font-bold text-[#3890d8]"
                >
-                  Instructor
+                  Student
                </Link>
             </p>
          </div>
@@ -59,7 +60,7 @@ const Login = () => {
             <div className="space-y-4">
                <div>
                   <label htmlFor="username" className="block mb-2 text-sm">
-                     Student Username
+                     Instructor Username
                   </label>
                   <input
                      type="text"
@@ -108,4 +109,4 @@ const Login = () => {
    );
 };
 
-export default Login;
+export default InstructorLogin;

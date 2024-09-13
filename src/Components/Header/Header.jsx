@@ -9,15 +9,16 @@ import { AuthContext } from "../../Layouts/Primary";
 
 const Header = () => {
    const [loading, setLoading] = useState(false);
-   const { userData } = useContext(AuthContext);
+   const { userData, token } = useContext(AuthContext);
+   const role = localStorage.getItem("role");
+   const user_id = localStorage.getItem("student_id");
    const navigate = useNavigate();
-   const token = localStorage.getItem("token");
 
    // logout
    const handleLogout = async () => {
       try {
          setLoading(true);
-         fetch("https://studysphere-dnn6.onrender.com/accounts/user/logout/", {
+         fetch("https://studysphere-dnn6.onrender.com/api/student/logout/", {
             method: "POST",
             headers: {
                Authorization: `Token ${token}`,
@@ -27,7 +28,9 @@ const Header = () => {
             .then((res) => res.json())
             .then((data) => {
                localStorage.removeItem("token");
-               localStorage.removeItem("user_id");
+               localStorage.removeItem("student_id");
+               localStorage.removeItem("instructor_id");
+               localStorage.removeItem("role");
             });
       } finally {
          setLoading(false);
@@ -74,8 +77,20 @@ const Header = () => {
                Contact Us
             </NavLink>
          </li>
+         <li>
+            <NavLink
+               to="/about"
+               className={({ isActive }) =>
+                  isActive
+                     ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                     : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+               }
+            >
+               About Us
+            </NavLink>
+         </li>
          {/* conditional nav item */}
-         {token && (
+         {user_id && (
             <li>
                <NavLink
                   to="/tuition_history"
@@ -86,6 +101,21 @@ const Header = () => {
                   }
                >
                   Tuition History
+               </NavLink>
+            </li>
+         )}
+         {/* instructor nav item */}
+         {role && (
+            <li>
+               <NavLink
+                  to="/instructor/manage_tuition"
+                  className={({ isActive }) =>
+                     isActive
+                        ? "border border-[#3890d8] bg-[#3890d8] font-bold transition-color hover:bg-[#3890d8] hover:border-[#3890d8]   text-white"
+                        : "transition-color hover:bg-[#3890d8] hover:border-[#3890d8] hover:text-white hover:scale-105"
+                  }
+               >
+                  Dashboard
                </NavLink>
             </li>
          )}
@@ -186,51 +216,14 @@ const Header = () => {
                      </Link>
                   </div>
 
-                  {/* nav items */}
-                  <div className="navbar-center hidden lg:flex">
-                     <ul className="menu menu-horizontal gap-4">{navItems}</ul>
-                  </div>
-
                   {/* navbar end profile area */}
-                  <div className="navbar-end space-x-2">
-                     {/* theme switcher */}
-                     <label className="grid cursor-pointer place-items-center">
-                        <input
-                           type="checkbox"
-                           value="dark"
-                           className="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"
-                        />
-                        <svg
-                           className="stroke-base-100 fill-base-100 col-start-1 row-start-1"
-                           xmlns="http://www.w3.org/2000/svg"
-                           width="14"
-                           height="14"
-                           viewBox="0 0 24 24"
-                           fill="none"
-                           stroke="currentColor"
-                           strokeWidth="2"
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                        >
-                           <circle cx="12" cy="12" r="5" />
-                           <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-                        </svg>
-                        <svg
-                           className="stroke-base-100 fill-base-100 col-start-2 row-start-1"
-                           xmlns="http://www.w3.org/2000/svg"
-                           width="14"
-                           height="14"
-                           viewBox="0 0 24 24"
-                           fill="none"
-                           stroke="currentColor"
-                           strokeWidth="2"
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                        >
-                           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                     </label>
-
+                  <div className="navbar-end">
+                     {/* nav items */}
+                     <div className="hidden lg:flex">
+                        <ul className="menu menu-horizontal gap-4">
+                           {navItems}
+                        </ul>
+                     </div>
                      {/* profile icon */}
                      <div className="dropdown dropdown-end">
                         <div

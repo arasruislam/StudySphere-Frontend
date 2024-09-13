@@ -15,15 +15,19 @@ const SignUp = () => {
       // form data
       const first_name = e.target.first_name.value;
       const last_name = e.target.last_name.value;
+      const mobile_no = e.target.mobile_no.value;
+      const profile_img = e.target.profile_img.value;
       const username = e.target.username.value;
       const email = e.target.email.value;
       const password = e.target.password.value;
       const confirm_password = e.target.confirm_password.value;
 
-      const newUser = {
+      const StudentData = {
          username,
          first_name,
          last_name,
+         mobile_no,
+         profile_img,
          email,
          password,
          confirm_password,
@@ -50,8 +54,8 @@ const SignUp = () => {
       try {
          setLoading(true);
          const response = await axios.post(
-            "https://studysphere-dnn6.onrender.com/accounts/new_user/register/",
-            newUser
+            "https://studysphere-dnn6.onrender.com/api/student/register/",
+            StudentData
          );
 
          if (response.status === 200) {
@@ -67,7 +71,6 @@ const SignUp = () => {
       } finally {
          setLoading(false);
       }
-
    };
 
    if (loading === true) return <Loader />;
@@ -75,9 +78,16 @@ const SignUp = () => {
    return (
       <div className="flex flex-col max-w-3xl mx-auto shadow-md p-6 rounded-md sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
          <div className="mb-8 text-center">
-            <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
+            <h1 className="my-3 text-4xl font-bold">Sign Up as an Student</h1>
             <p className="text-sm text-gray-400 dark:text-gray-600">
-               Sign up to create your account
+               Create an account to become an{" "}
+               <Link
+                  to="/instructor_signUp"
+                  className="hover:underline font-bold text-[#3890d8]"
+               >
+                  instructor
+               </Link>{" "}
+               on StudySphere
             </p>
          </div>
          <form onSubmit={handleSignUpUser} className="space-y-12">
@@ -106,6 +116,39 @@ const SignUp = () => {
                         name="last_name"
                         id="last_name"
                         placeholder="enter last name"
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
+                     />
+                  </div>
+               </div>
+
+               {/* mobile & profile image */}
+               <div className="flex flex-col md:flex-row gap-4 items-center">
+                  <div className="flex-1">
+                     <label htmlFor="mobile_no" className="text-sm">
+                        Phone Number
+                     </label>
+                     <input
+                        type="text"
+                        name="mobile_no"
+                        id="mobile_no"
+                        placeholder="enter your phone number..."
+                        className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
+                        required
+                     />
+                     <p className="text-xs text-gray-500">
+                        also use country code. example: (+880)
+                     </p>
+                  </div>
+                  <div className="flex-1">
+                     <label htmlFor="profile_img" className="text-sm">
+                        Image Url
+                     </label>
+                     <input
+                        type="url"
+                        name="profile_img"
+                        id="profile_img"
+                        placeholder="enter your profile image url..."
                         className="w-full px-3 py-2 border rounded-md border-gray-700 dark:border-gray-300 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800"
                         required
                      />

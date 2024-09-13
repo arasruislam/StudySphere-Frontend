@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import TuitionCard from "../Components/Sections/TuitionCard";
+import TuitionCard from "../Components/Sections/Tuition/TuitionCard";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import EmptyState from "../Components/Sections/EmptyState";
@@ -15,11 +15,27 @@ const Tuition = () => {
    const page = parseInt(searchParams.get("page") || 1);
    const [totalPages, setTotalPages] = useState(null);
 
+   const CLASS_CHOICES = [
+      { label: "All", value: "All" },
+      { label: "Class 1", value: "Class 1" },
+      { label: "Class 2", value: "Class 2" },
+      { label: "Class 3", value: "Class 3" },
+      { label: "Class 4", value: "Class 4" },
+      { label: "Class 5", value: "Class 5" },
+      { label: "Class 6", value: "Class 6" },
+      { label: "Class 7", value: "Class 7" },
+      { label: "Class 8", value: "Class 8" },
+      { label: "Class 9", value: "Class 9" },
+      { label: "Class 10", value: "Class 10" },
+      { label: "HSC 1", value: "HSC 1" },
+      { label: "HSC 2", value: "HSC 2" },
+   ];
+
    useEffect(() => {
       const fetchTuitions = async () => {
          try {
             const response = await axios.get(
-               `https://studysphere-dnn6.onrender.com/tuitions/list/?page=${page}`
+               `https://studysphere-dnn6.onrender.com/api/tuitions/list/?page=${page}`
             );
             setTuitions(response.data.results);
             setFilteredData(response.data.results);
@@ -79,7 +95,6 @@ const Tuition = () => {
       }
 
       if (page < totalPages - 2) {
-         // 4 , 98
          paginationItems.push(
             <button key="dot-right" className="join-item btn btn-disabled">
                ...
@@ -99,20 +114,22 @@ const Tuition = () => {
       return paginationItems;
    };
 
-   // handle filter by level instead of class
-   const handleFilterByLevel = (level) => {
-      if (level === "All") {
+   // handle filter by class
+   const handleFilterByClass = (tuitionClass) => {
+      if (tuitionClass === "All") {
          setFilteredData(tuitions);
          navigate("/tuitions");
       } else {
-         const filteredData = tuitions.filter((data) => data.level === level);
+         const filteredData = tuitions.filter(
+            (data) => data.tuition_class === tuitionClass
+         );
          setFilteredData(filteredData);
-         navigate(`/tuitions/?page=${page}&filtered_by=${level}`);
+         navigate(`/tuitions/?page=${page}&filtered_by=${tuitionClass}`);
       }
    };
 
-
    if (tuitions < 1) return <Loader />;
+
    return (
       <>
          <div className="mb-6 pb-4 border-b w-full text-end">
@@ -122,30 +139,19 @@ const Tuition = () => {
                   role="button"
                   className="btn m-1 text-white font-bold bg-[#3890d8] border-none hover:bg-[#3890d8]"
                >
-                  Filter by level
+                  Filter by Class
                </div>
                <ul
                   tabIndex={0}
                   className="dropdown-content  menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
                >
-                  <li>
-                     <a onClick={() => handleFilterByLevel("All")}>All</a>
-                  </li>
-                  <li>
-                     <a onClick={() => handleFilterByLevel("Beginner")}>
-                        Beginner
-                     </a>
-                  </li>
-                  <li>
-                     <a onClick={() => handleFilterByLevel("Intermediate")}>
-                        Intermediate
-                     </a>
-                  </li>
-                  <li>
-                     <a onClick={() => handleFilterByLevel("Advanced")}>
-                        Advanced
-                     </a>
-                  </li>
+                  {CLASS_CHOICES.map((choice) => (
+                     <li key={choice.value}>
+                        <a onClick={() => handleFilterByClass(choice.value)}>
+                           {choice.label}
+                        </a>
+                     </li>
+                  ))}
                </ul>
             </div>
          </div>
